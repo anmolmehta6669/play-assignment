@@ -1,0 +1,12 @@
+@(firstName: String, lastName:String, email:String)
+
+@main("hello Play"){
+<div>
+    <p>First Name: @firstName</p>
+    <p>Last Name: @lastName</p>
+    <p>Email: @email</p>
+    <p><a href="@routes.SignIn.changePassword">Change Password</a></p>
+    <p><a href="@routes.SignIn.changeDetails">Change Details</a></p>
+    <p><a href="@routes.HomeController.index">LogOut</a></p>
+</div>
+}

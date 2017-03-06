@@ -1,0 +1,12 @@
+@(email: String)
+
+@main("register"){
+<div>
+    <form action="@routes.ProfileController.addProfile" method="post">
+        <p>First Name:<input type="text" name="firstName"></p>
+        <p>Last Name:<input type="text" name="lastName"></p>
+        <p>Email:<input type="email" name="email" value="@email"></p>
+        <p><input type="submit" value="Submit" name="submit"></p>
+    </form>
+</div>
+}
