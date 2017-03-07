@@ -21,10 +21,12 @@ class SignIn extends Controller{
   def checkUser=Action { implicit request =>
     SignInForm.bindFromRequest.fold(
       formWithErrors => {
+//        println("tmkc")
         Redirect(routes.HomeController.signIn()).flashing(
           "error" -> "Something went Wrong Please Try Again")
       },
       userData => {
+//        println("ok h bhau")
         val flag: Boolean = UserService.hasAccount(userData.emailId)
         if (flag) Redirect(routes.HomeController.profile(userData.emailId)).withSession(
           "emailId" -> userData.emailId)

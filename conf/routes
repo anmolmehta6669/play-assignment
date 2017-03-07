@@ -26,3 +26,5 @@ GET     /profile/:email             controllers.HomeController.profile(email:Str
 GET     /changepassword             controllers.SignIn.changePassword
 
 GET     /changeDetails              controllers.SignIn.changeDetails
+
+POST    /login                      controllers.SignIn.checkUser

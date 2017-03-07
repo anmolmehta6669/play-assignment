@@ -26,7 +26,7 @@ class HomeController @Inject() extends Controller {
     Ok(views.html.signup("Sign Up"))
   }
 
-  def signIn = Action {
+  def signIn = Action { implicit request=>
     Ok(views.html.signin("Sign In"))
   }
   def profile(email:String) = Action {

@@ -1,9 +1,10 @@
-@(title:String)
+@(title:String)(implicit flash:Flash)
 
 @main(title){
 
 <div>
-    <form action="" method="post">
+    <form action="@routes.SignIn.checkUser" method="post">
+        @flash.get("error").getOrElse("")
         <p> Email:<input type="email" name="emailId"></p>
         <p>Password:<input type="password" name="password"></p>
         <p><input type="submit" value="Submit" name="submit"></p>
