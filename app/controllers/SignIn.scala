@@ -28,7 +28,7 @@ class SignIn extends Controller{
       userData => {
 //        println("ok h bhau")
         val flag: Boolean = UserService.hasAccount(userData.emailId)
-        if (flag) Redirect(routes.HomeController.profile(userData.emailId)).withSession(
+        if (flag) Redirect(routes.HomeController.profile()).withSession(
           "emailId" -> userData.emailId)
         else {
           /*Redirect(routes.HomeController.firstPage())*/
