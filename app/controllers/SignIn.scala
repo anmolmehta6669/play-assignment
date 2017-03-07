@@ -1,14 +1,16 @@
 package controllers
 
+import com.google.inject.Inject
 import play.api.data.Form
 import play.api.data.Forms._
-import models.{UserService, User}
+import models.User
 import play.api.mvc._
+import services.{UserServiceTrait, UserService}
 
 /**
   * Created by knoldus on 6/3/17.
   */
-class SignIn extends Controller{
+class SignIn @Inject() (userService:UserServiceTrait)extends Controller{
   val SignInForm= Form{
 
     mapping(
@@ -27,9 +29,11 @@ class SignIn extends Controller{
       },
       userData => {
 //        println("ok h bhau")
-        val flag: Boolean = UserService.hasAccount(userData.emailId)
-        if (flag) Redirect(routes.HomeController.profile()).withSession(
-          "emailId" -> userData.emailId)
+        val flag: Boolean = userService.hasAccount(userData.emailId)
+        if (flag) {
+          Redirect(routes.ProfileController.profile).withSession(
+            "emailId" -> userData.emailId)
+        }
         else {
           /*Redirect(routes.HomeController.firstPage())*/
           Redirect(routes.HomeController.signIn()).flashing(

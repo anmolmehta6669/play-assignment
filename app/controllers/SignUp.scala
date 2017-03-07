@@ -1,19 +1,22 @@
 package controllers
 
+import com.google.inject.Inject
 import models.NewUser
 import play.api.data.Form
 import play.api.mvc.Controller
 import play.api.mvc._
 import play.api.data.Forms._
-import models.UserService
+import services.{MD5, UserServiceTrait, UserService}
 
-class SignUp extends Controller {
+class SignUp @Inject() (userService:UserServiceTrait)extends Controller {
   val newUserForm=Form(
     mapping(
       "emailId"-> email,
       "password"->nonEmptyText,
       "confirmPassword"->nonEmptyText
-    )(NewUser.apply)(NewUser.unapply)
+    )(NewUser.apply)(NewUser.unapply).verifying("password dont match", fields=> fields match {
+      case data=> data.password==data.confirmPassword
+    })
   )
 
   def addAccount=Action{ implicit request=>
@@ -22,7 +25,8 @@ class SignUp extends Controller {
          Redirect(routes.HomeController.index())
        },
        userData =>{
-         if(UserService.createNewUser(userData.emailId,userData.password))
+         val user = userData.copy(password = MD5.hash(userData.password) )
+         if(userService.createNewUser(user.emailId,user.password))
          Ok(views.html.register(userData.emailId))
          else
            Redirect(routes.HomeController.index())

@@ -21,7 +21,7 @@ POST    /addAccount                 controllers.SignUp.addAccount
 
 POST    /addDetails                 controllers.ProfileController.addProfile
 
-GET     /profile             controllers.HomeController.profile
+GET     /profile                     controllers.ProfileController.profile
 
 GET     /changepassword             controllers.SignIn.changePassword
 
