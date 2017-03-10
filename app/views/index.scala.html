@@ -2,7 +2,7 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(message: String)
+@(message: String)(implicit flash:Flash)
 
 @*
  * Call the `main` template with two arguments. The first
@@ -10,7 +10,7 @@
  * argument is an `Html` object containing the body of the page.
  *@
 @main("Welcome to the Assignment") {
-
+@flash.get("error").getOrElse("")
     @*
      * Get an `Html` object by calling the built-in Play welcome
      * template and passing a `String` message.

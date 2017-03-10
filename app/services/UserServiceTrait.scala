@@ -13,15 +13,23 @@ import scala.collection.mutable.ListBuffer
 trait UserServiceTrait {
 
 
-    val users:ListBuffer[User]
+  val users: ListBuffer[String]
 
-    def getPassword(email:String): Option[String]
+  def login(email:String,password:String):Boolean
 
-    def hasAccount(email:String):Boolean
-//    def editUserPassword(emailId:String,password:String,newpassword:String): Boolean
+  def showAllUser:ListBuffer[User]
 
-//    def editUserEmail(email:String,newemail:String,password:String): Boolean
+  def showUser(email: String): Option[User]
 
+  def hasAccount(email: String): Boolean
 
-    def createNewUser(email:String,password:String): Boolean
+  //    def editUserPassword(emailId:String,password:String,newpassword:String): Boolean
+
+  //    def editUserEmail(email:String,newemail:String,password:String): Boolean
+
+  def disableUser(email:String):Boolean
+
+  def enableUser(email:String):Boolean
+
+  def createNewUser(user: User): Boolean
 }

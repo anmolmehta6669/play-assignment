@@ -3,9 +3,9 @@ package controllers
 import com.google.inject.Inject
 import play.api.data.Form
 import play.api.data.Forms._
-import models.User
+import models.{UserSignIn, User}
 import play.api.mvc._
-import services.{UserServiceTrait, UserService}
+import services.{MD5, UserServiceTrait, UserService}
 
 /**
   * Created by knoldus on 6/3/17.
@@ -16,7 +16,7 @@ class SignIn @Inject() (userService:UserServiceTrait)extends Controller{
     mapping(
       "emailId" -> nonEmptyText,
       "password" -> nonEmptyText
-    )(User.apply)(User.unapply)
+    )(UserSignIn.apply)(UserSignIn.unapply)
 
   }
 
@@ -29,11 +29,11 @@ class SignIn @Inject() (userService:UserServiceTrait)extends Controller{
       },
       userData => {
 //        println("ok h bhau")
-        val flag: Boolean = userService.hasAccount(userData.emailId)
-        if (flag) {
+        val user = userData.copy(password = MD5.hash(userData.password))
+        val flag= userService.login(user.emailId,user.password)
+        if(flag)
           Redirect(routes.ProfileController.profile).withSession(
             "emailId" -> userData.emailId)
-        }
         else {
           /*Redirect(routes.HomeController.firstPage())*/
           Redirect(routes.HomeController.signIn()).flashing(

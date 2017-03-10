@@ -19,12 +19,20 @@ GET     /signin                     controllers.HomeController.signIn
 
 POST    /addAccount                 controllers.SignUp.addAccount
 
-POST    /addDetails                 controllers.ProfileController.addProfile
-
 GET     /profile                     controllers.ProfileController.profile
 
-GET     /changepassword             controllers.SignIn.changePassword
-
-GET     /changeDetails              controllers.SignIn.changeDetails
-
 POST    /login                      controllers.SignIn.checkUser
+
+GET     /logout                     controllers.ProfileController.logout
+
+GET     /changePassword             controllers.ProfileController.changePassword
+
+GET     /changeDetails              controllers.ProfileController.changeDetails
+
+GET     /manage                     controllers.ProfileController.manageUsers
+
+GET     /disable                    controllers.ProfileController.disable(email:String)
+
+GET     /enable                     controllers.ProfileController.enable(email:String)
+
+

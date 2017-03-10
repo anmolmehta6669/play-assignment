@@ -1,12 +1,18 @@
-@(firstName: String, lastName:String, email:String)
+@(user:User)
+
+
 
 @main("hello Play"){
 <div>
-    <p>First Name: @firstName</p>
-    <p>Last Name: @lastName</p>
-    <p>Email: @email</p>
-    <p><a href="@routes.SignIn.changePassword">Change Password</a></p>
-    <p><a href="@routes.SignIn.changeDetails">Change Details</a></p>
-    <p><a href="@routes.HomeController.index">LogOut</a></p>
+    <p>First Name: @user.firstName</p>
+    <p>Last Name: @user.lastName</p>
+    <p>Age: @user.age</p>
+
+    <p><a href="@routes.ProfileController.changePassword">Change Password</a></p>
+    <p><a href="@routes.ProfileController.changeDetails">Change Details</a></p>
+    <p><a href="@routes.ProfileController.logout">LogOut</a></p>
+    @if(user.role){
+        <input type="button" value="Manage Users" aria-hidden="true" onclick="manageUsers()">
+    }
 </div>
 }
