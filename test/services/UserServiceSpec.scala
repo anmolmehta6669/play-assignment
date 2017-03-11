@@ -56,7 +56,7 @@ class UserServiceSpec extends PlaySpec with MockitoSugar{
       }
 
       "disable user with correct input" in{
-        
+
       }
 
     }

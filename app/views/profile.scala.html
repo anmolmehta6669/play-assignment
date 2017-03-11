@@ -1,6 +1,6 @@
 @(user:User)
 
-
+<script type="text/javascript" src="@routes.JavaScriptController.javascriptRoutes"></script>
 
 @main("hello Play"){
 <div>
@@ -11,8 +11,30 @@
     <p><a href="@routes.ProfileController.changePassword">Change Password</a></p>
     <p><a href="@routes.ProfileController.changeDetails">Change Details</a></p>
     <p><a href="@routes.ProfileController.logout">LogOut</a></p>
+    <div id="body"></div>
     @if(user.role){
-        <input type="button" value="Manage Users" aria-hidden="true" onclick="manageUsers()">
+        <input id="manage" type="button" value="Manage Users" aria-hidden="true">
     }
 </div>
 }
+
+<script>
+    $(document).ready(function()
+    {
+        $('#manage').on("click",function()
+        {
+                jsRoutes.controllers.ProfileController.manageUsers.ajax
+                ({
+                    success: function(data)
+                    {
+                    $('#body').html(data);
+                    },
+                    error: function()
+                    {
+                        $('#body').html("hello");
+                        alert("fail")
+                    }
+                })
+         })
+    };
+</script>

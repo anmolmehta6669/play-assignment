@@ -1,7 +1,7 @@
 @import scala.collection.mutable.ListBuffer
 @(users:ListBuffer[User])
 
-@main("hello Play"){
+
 <div>
     @for(user<-users){
     <p>First Name: @user.firstName</p>
@@ -16,4 +16,3 @@
     <p><a href="@routes.ProfileController.changeDetails">Change Details</a></p>
     <p><a href="@routes.ProfileController.logout">logout</a></p>
 </div>
-}

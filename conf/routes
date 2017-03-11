@@ -35,4 +35,6 @@ GET     /disable                    controllers.ProfileController.disable(email:
 
 GET     /enable                     controllers.ProfileController.enable(email:String)
 
+GET     /javascriptRoutes           controllers.JavaScriptController.javascriptRoutes
+
 
