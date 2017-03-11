@@ -23,7 +23,7 @@
     {
         $('#manage').on("click",function()
         {
-                jsRoutes.controllers.ProfileController.manageUsers.ajax
+            jsRoutes.controllers.ProfileController.manageUsers().ajax
                 ({
                     success: function(data)
                     {
@@ -35,6 +35,6 @@
                         alert("fail")
                     }
                 })
-         })
-    };
+        })
+    });
 </script>
